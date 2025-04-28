@@ -12,7 +12,7 @@ private val retrofit = Retrofit.Builder().baseUrl("https://jsonplaceholder.typic
 val APIService = retrofit.create(ApiService :: class.java)
 
 interface ApiService {
-    @GET()
+    @GET("/comments")
     suspend fun getpost() : List<DataClassPost>
 
 }
