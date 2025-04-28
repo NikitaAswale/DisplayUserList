@@ -10,5 +10,5 @@ data class DataClassPost(
 )
 
 data class Post(
-    val getpost : List<DataClassPost>
+    val get : List<DataClassPost>
 )
