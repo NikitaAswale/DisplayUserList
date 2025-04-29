@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,13 +29,13 @@ import com.example.displayapp.com.example.displayapp.MainViewModel
 import com.google.ai.client.generativeai.type.content
 
 @Composable
-fun DisplayScreen(navController: NavHostController) {
+fun UserScreen(navController: NavHostController) {
     val viewModel: MainViewModel = viewModel()
     val viewState = viewModel.postState.value
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = androidx.compose.ui.Modifier.fillMaxSize()) {
         when {
             viewState.loading -> {
-                CircularProgressIndicator(Modifier.align(Alignment.Center))
+                CircularProgressIndicator(androidx.compose.ui.Modifier.align(Alignment.Center))
             }
 
             viewState.error != null -> {
@@ -45,43 +44,41 @@ fun DisplayScreen(navController: NavHostController) {
 
             else -> {
                 //Display Categories
-                DisplayList(categories = viewState.list, rememberNavController())
+                UserList(categories = viewState.list, rememberNavController())
 
             }
         }
     }
 }
 @Composable
-fun DisplayList(categories: List<DataClassPost>, navController: NavHostController) {
+fun UserList(categories: List<DataClassPost>, navController: NavHostController) {
     Column (
-            modifier = Modifier
-                .fillMaxSize(),// Make the Column take up all available screen space vertically
-    //.padding(8.dp)// Optional padding around the Column
-    verticalArrangement = Arrangement.Center // Optional space between rows
+        modifier = androidx.compose.ui.Modifier.fillMaxWidth(),// Make the Column take up all available screen space vertically
+        //.padding(8.dp)// Optional padding around the Column
+        verticalArrangement = Arrangement.Center // Optional space between rows
     ) {
         Row(
-            Modifier.fillMaxWidth().padding(8.dp),
+            modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Title",
+                text = "User Name & Email List",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Magenta
             )
         }
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = androidx.compose.ui.Modifier.fillMaxWidth()
                 .weight(0.3f).padding(8.dp),// Assign weight 1 (same as Row 1)
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.Start
         ) {
-            LazyColumn {
+            LazyColumn  {
                 content {
                     itemsIndexed(categories, itemContent = { index, item ->
-                        DisplayItem(
+                        UserItem(
                             item = categories[index]
                         )
                     }
@@ -91,23 +88,21 @@ fun DisplayList(categories: List<DataClassPost>, navController: NavHostControlle
         }
         Row (modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ){
+            horizontalArrangement = Arrangement.Center){
             Button(onClick = {
-                navController.navigate("Screen_2"){
-                }
+                navController.navigate("Screen_1")
             }) {
-                Text(text = "Go to User & Email Screen")
+                Text(text = "Go to Display Screen")
             }
         }
     }
-    }
+}
 
 @Composable
-fun DisplayItem(item : DataClassPost){
+fun UserItem(item : DataClassPost){
     Row {
         Text(
-            text = "Body = ",
+            text = " Name : ",
             style = TextStyle(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
@@ -116,7 +111,7 @@ fun DisplayItem(item : DataClassPost){
         )
 
         Text(
-            text = item.body,
+            text = item.name,
             style = TextStyle(
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Normal,
@@ -125,5 +120,25 @@ fun DisplayItem(item : DataClassPost){
         )
 
     }
-    Spacer(modifier = Modifier.height(8.dp))
+    Row {
+    Text(
+            text = " Email :",
+            style = TextStyle(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Red
+            )
+        )
+
+        Text(
+            text = item.email,
+            style = TextStyle(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                color = Color.Black
+            )
+        )
+
+    }
+    Spacer(modifier = androidx.compose.ui.Modifier.height(12.dp))
 }
