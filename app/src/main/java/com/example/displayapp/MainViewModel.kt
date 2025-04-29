@@ -1,9 +1,11 @@
-package com.example.displayapp
+package com.example.displayapp.com.example.displayapp
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.displayapp.APIService
+import com.example.displayapp.DataClassPost
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
