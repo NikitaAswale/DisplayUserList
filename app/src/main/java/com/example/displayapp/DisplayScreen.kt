@@ -94,7 +94,7 @@ fun DisplayList(categories: List<DataClassPost>, navController: NavHostControlle
             horizontalArrangement = Arrangement.Center
         ){
             Button(onClick = {
-                navController.navigate("Screen_2"){
+                navController.navigate(Routes.UserScreen){
                 }
             }) {
                 Text(text = "Go to User & Email Screen")
