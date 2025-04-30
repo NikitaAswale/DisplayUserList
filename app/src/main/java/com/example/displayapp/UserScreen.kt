@@ -90,7 +90,7 @@ fun UserList(categories: List<DataClassPost>, navController: NavHostController) 
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center){
             Button(onClick = {
-                navController.navigate("Screen_1")
+                navController.navigate(Routes.DisplayScreen)
             }) {
                 Text(text = "Go to Display Screen")
             }
